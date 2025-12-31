@@ -157,8 +157,10 @@
           <div
             class="tier-content"
             @dragover.prevent
-            @drop="handleDrop(tier.items)"
-            :class="{ 'drag-over': isDragging }"
+            @dragenter="handleDragEnter(tier.id)"
+            @dragleave="handleDragLeave"
+            @drop="handleDrop(tier.items, tier.id)"
+            :class="{ 'drag-over': isDragging, 'drag-hover': dragOverTierId === tier.id }"
           >
             <div
               v-for="item in tier.items"
@@ -284,6 +286,7 @@ const sourceList = ref<RankItem[] | null>(null)
  * 是否正在拖拽中（用于UI反馈）
  */
 const isDragging = ref(false)
+const dragOverTierId = ref<string | null>(null)
 const isRanking = ref(false)
 const rankMode = ref<'sequence' | 'random'>('sequence')
 const isExporting = ref(false)
@@ -632,11 +635,33 @@ const handleDragStart = (item: RankItem, list: RankItem[]) => {
 }
 
 /**
+ * 拖拽进入层级
+ * @param {string} tierId - The tier ID being entered
+ */
+const handleDragEnter = (tierId: string) => {
+  dragOverTierId.value = tierId
+}
+
+/**
+ * 拖拽离开层级
+ */
+const handleDragLeave = () => {
+  // 使用延迟来避免子元素触发的闪烁
+  setTimeout(() => {
+    if (dragOverTierId.value) {
+      // 会在 dragenter 时重新设置，这里不立即清除
+    }
+  }, 50)
+}
+
+/**
  * 放置处理
  * @param {RankItem[]} targetList - The list receiving the item
+ * @param {string} tierId - The tier ID (optional)
  */
-const handleDrop = (targetList: RankItem[]) => {
+const handleDrop = (targetList: RankItem[], tierId?: string) => {
   isDragging.value = false
+  dragOverTierId.value = null
   if (!draggedItem.value || !sourceList.value) return
 
   // 如果是在同一个列表中，这里可以处理排序逻辑（暂时简单处理为添加到末尾）
@@ -769,6 +794,21 @@ const deleteItem = (id: string, list: RankItem[]) => {
   gap: 10px;
   align-content: flex-start;
   min-height: 100px; /* 确保有足够区域放置 */
+  transition: all 0.3s ease;
+}
+
+/* 拖拽时所有层级的轻微提示 */
+.tier-content.drag-over {
+  background: #f5f5f5;
+}
+
+/* 拖拽悬停时的动画效果 */
+.tier-content.drag-hover {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  box-shadow: inset 0 0 20px rgba(24, 160, 88, 0.3);
+  transform: scale(1.02);
+  border: 2px dashed #18a058;
+  margin: -2px;
 }
 
 /* 图片池样式 */
@@ -1072,6 +1112,20 @@ const deleteItem = (id: string, list: RankItem[]) => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* 拖拽悬停时层级标签的动画 */
+.tier-row:has(.drag-hover) .tier-label {
+  animation: pulse-label 0.8s ease-in-out infinite;
+}
+
+@keyframes pulse-label {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* 引导区域样式 */
