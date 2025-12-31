@@ -7,6 +7,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Custom scripts
+build.sh
+
 # Dependencies
 node_modules
 .pnpm-store
@@ -90,3 +93,5 @@ docker-compose.override.yml
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+build.sh
