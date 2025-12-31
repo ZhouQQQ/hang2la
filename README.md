@@ -2,6 +2,8 @@
 
 > 一个有趣的梯度排行工具，让你轻松对任何事物进行等级分类！
 
+🔗 **在线体验：[https://hang2la.vercel.app/](https://hang2la.vercel.app/)**
+
 ![Vue](https://img.shields.io/badge/Vue-3.x-4FC08D?style=flat-square&logo=vue.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript)
 ![Naive UI](https://img.shields.io/badge/Naive_UI-2.x-18A058?style=flat-square)
