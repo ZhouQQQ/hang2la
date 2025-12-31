@@ -10,6 +10,9 @@ lerna-debug.log*
 # Custom scripts
 build.sh
 
+# Default template files
+public/vite.svg
+
 # Dependencies
 node_modules
 .pnpm-store
@@ -34,9 +37,7 @@ build
 .env.production
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
+.vscode
 .idea
 *.suo
 *.ntvs*

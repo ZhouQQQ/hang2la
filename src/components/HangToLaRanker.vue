@@ -30,6 +30,11 @@
               </n-text>
             </n-upload-dragger>
           </n-upload>
+          <div class="demo-hint">
+            <n-button text type="primary" @click="loadColaDemo">
+              🥤 试试可乐排行示例
+            </n-button>
+          </div>
         </div>
         
         <!-- 已上传的图片预览 -->
@@ -368,6 +373,38 @@ const goToStep2 = () => {
     return
   }
   currentStep.value = 2
+}
+
+/**
+ * 可乐品牌示例数据
+ */
+const colaDemoData = [
+  { name: '可口可乐', url: '/demo/cola/coca-cola.svg' },
+  { name: '百事可乐', url: '/demo/cola/pepsi.svg' },
+  { name: '崂山可乐', url: '/demo/cola/laoshan.svg' },
+  { name: '天府可乐', url: '/demo/cola/tianfu.svg' },
+  { name: '非常可乐', url: '/demo/cola/feichang.svg' },
+]
+
+/**
+ * 加载可乐示例
+ */
+const loadColaDemo = () => {
+  // 清空现有图片
+  pool.value = []
+  
+  // 添加可乐品牌图片
+  colaDemoData.forEach((cola, index) => {
+    pool.value.push({
+      id: `cola-${Date.now()}-${index}`,
+      url: cola.url
+    })
+  })
+  
+  // 修改标题
+  title.value = '可乐排行榜'
+  
+  message.success(`已加载 ${colaDemoData.length} 款可乐，开始你的排行吧！`)
 }
 
 /**
@@ -921,6 +958,11 @@ const deleteItem = (id: string, list: RankItem[]) => {
 .upload-area {
   max-width: 500px;
   margin: 0 auto 30px;
+}
+
+.demo-hint {
+  text-align: center;
+  margin-top: 15px;
 }
 
 .uploaded-preview {

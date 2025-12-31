@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="95" fill="#004B93"/>
+  <path d="M5 100 Q100 60 195 100" fill="#E32934"/>
+  <path d="M5 100 Q100 140 195 100" fill="white"/>
+  <text x="100" y="90" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">百事</text>
+  <text x="100" y="120" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">可乐</text>
+</svg>
+
