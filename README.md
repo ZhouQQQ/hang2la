@@ -178,10 +178,5 @@ hang-to-la/
 ---
 
 <p align="center">
-  Made with ❤️ by 
-  <a href="https://github.com/yourusername">Your Name</a>
-</p>
-
-<p align="center">
-  如果觉得有用，请给个 ⭐ Star 支持一下！
+  如果觉得好玩或有用，请给个 ⭐ Star 支持一下！
 </p>
